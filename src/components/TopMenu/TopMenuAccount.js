@@ -1,11 +1,21 @@
 import React, { useState, Dispatch } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector, connect } from "react-redux";
+import firebase from '../../firebase';
+import {logoutUser} from '../../actions/authAction';
+import PropTypes from 'prop-types';
 
-function TopMenuAccount() {
+function TopMenuAccount(props) {
 
-  const email = "some@any.com";
+  const { auth } = props;
+  console.log(auth);
+  const email = auth.user.email;
   const [isShow, setShow] = useState(false);
-
+  const onLogout = (e) => {
+    e.preventDefault();
+    firebase.auth().signOut()
+    props.logoutUser();
+    console.log('Logout');
+  }
   return (
 
     <li className="nav-item dropdown no-arrow">
@@ -27,6 +37,7 @@ function TopMenuAccount() {
       <div className={`dropdown-menu dropdown-menu-right shadow animated--grow-in ${(isShow) ? "show" : ""}`}
         aria-labelledby="userDropdown">
         <a className="dropdown-item"
+        onClick={onLogout}
         href="# " 
         data-toggle="modal"
         data-target="#logoutModal">
@@ -38,4 +49,15 @@ function TopMenuAccount() {
   );
 };
 
-export default TopMenuAccount;
+TopMenuAccount.propTypes = {
+  logoutUser: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired
+}
+
+const mapStateToProps = (state) => {
+  return {
+      auth: state.auth
+  };
+}
+
+export default connect(mapStateToProps, {logoutUser})(TopMenuAccount);
