@@ -1,54 +1,53 @@
 import axios from 'axios';
-// import setAuthToken from '../util/set_auth_token';
 import {GET_ERRORS,SET_CURRENT_USER} from './types';
-import firebase from 'firebase';
-import jwt_decode from 'jwt-decode';
+import { usersRef } from '../firebase';
 
-// firebase.auth().signInWithEmailAndPassword(userData.email, userData.password);
 
 export const registerUser = (userData) => {
-    return (dispatch) => {
+    return (dispatch, getState, {getFirebase}) => {
+        const firebase = getFirebase();
         firebase.auth().createUserWithEmailAndPassword(userData.email, userData.password)
-        .catch(err => {
-            var errorCode = err.code;
-            var errorMessage = err.message;
-            console.log(`code:${errorCode}  message:${errorMessage}`);
+        .then((res) => {
+            return usersRef.child(res.user.uid)
+            .set({
+                firstName: userData.firstName,
+                lastName: userData.lastName,
+                userType: 1
+            })             
+        })
+        .then(() => {
+            dispatch({type: 'REGISTER_SUCCESS'});
+        })
+        .catch((err) => {
             dispatch({
                 type: GET_ERRORS,
-                payload: err.message//err.response.data
+                payload: err//err.response.data
+            });
         });
-        }
-            
-        );
+
     }       
     
 };
 
-// Login - Get user token
 
-export const loginUser = (userData) => dispatch => {
+export const loginUser = (userData) => (dispatch, getState, {getFirebase}) => {
+    dispatch(setLoading());
+    const firebase = getFirebase();
     firebase.auth().signInWithEmailAndPassword(userData.email, userData.password)
+        .then( () => {
+            dispatch({type:'LOGIN_SUCCESS'});
+        } )
         .catch(err => {
             var errorCode = err.code;
             var errorMessage = err.message;
             console.log(`code:${errorCode}  message:${errorMessage}`);
             dispatch({
                 type: GET_ERRORS,
-                payload: err.message//err.response.data
-        });
+                payload: err
+            });
         }
             
         );
-    let user = firebase.auth().currentUser;
-    console.log(user);
-    console.log('user');
-    if(user) {
-        const { email, uid } = user;
-        dispatch(setCurrentUser({id:uid, email: email}));
-    }
-    else {
-        dispatch(setCurrentUser({}));
-    }
 
 };
 
@@ -58,12 +57,20 @@ export const loginUser = (userData) => dispatch => {
 export const setCurrentUser = (userData) => {
     return {
         type: SET_CURRENT_USER,
-        payload: userData
+        payload: userData,
+        loading: false
     }
 }
 
 // Log user out
-export const logoutUser = () => dispatch => {
-    // Set current user to {} which will set isAuthenticated to false
-    dispatch(setCurrentUser({}));
+export const logoutUser = () => (dispatch, getState, {getFirebase}) => {
+    const firebase = getFirebase();
+    firebase.auth().signOut().then(()=>{
+        dispatch({type: 'LOGOUT_SUCCESS'});
+    });
+}
+
+
+export const setLoading = () => {
+    return {type: 'LOADING' };
 }

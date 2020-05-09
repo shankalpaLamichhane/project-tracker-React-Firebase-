@@ -4,7 +4,8 @@ import isEmpty from '../validation/is_empty';
 
 const initialState = {
     isAuthenticated: false,
-    user: {}
+    user: {},
+    loading: false
 }
 
 const authReducer = (state=initialState, action) => {
@@ -13,7 +14,29 @@ const authReducer = (state=initialState, action) => {
             return {
                 ...state,
                 isAuthenticated: !isEmpty(action.payload),
-                user: action.payload
+                user: action.payload,
+                loading: false
+            }
+
+        case 'LOGIN_SUCCESS':
+            console.log('Login Success')
+            return {
+                ...state,
+                loading: false
+            }
+
+        case 'LOGOUT_SUCCESS':
+            console.log('Log out success');
+            return state;
+        
+        case 'REGISTER_SUCCESS':
+            console.log('Register Success');
+            return state;
+        
+        case 'LOADING':
+            return {
+                ...state,
+                loading: true
             }
         
         default:

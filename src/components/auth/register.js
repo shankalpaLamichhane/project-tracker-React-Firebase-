@@ -9,11 +9,11 @@ class Register extends React.Component {
     constructor() {
         super();
         this.state = {
-          name: '',
+          firstName: '',
+          lastName: '',
           email: '',
           password: '',
-          password2: '',
-          errors: {}
+          error: ''
         };
     
         this.onChange = this.onChange.bind(this);
@@ -21,15 +21,18 @@ class Register extends React.Component {
       }
 
       componentDidMount() {
-        if(this.props.auth.isAuthenticated) {
-          this.props.history.push('/dashboard');
+        if(this.props.auth.uid) {
+          this.props.history.push('/');
         }
       }
       
 
       componentWillReceiveProps(nextProps) {
-        if(nextProps.errors) {
-          this.setState({errors: nextProps.errors}); 
+        if(nextProps.auth.uid) {
+          this.props.history.push('/');
+        }
+        if(nextProps.error) {
+          this.setState({error: nextProps.error})
         }
       }
 
@@ -41,10 +44,10 @@ class Register extends React.Component {
         e.preventDefault();
     
         const newUser = {
-          name: this.state.name,
+          firstName: this.state.firstName,
+          lastName: this.state.lastName,
           email: this.state.email,
           password: this.state.password,
-          password2: this.state.password2
         };
     
         
@@ -52,92 +55,98 @@ class Register extends React.Component {
       }
     
       render() {
-        const { errors } = this.state;
-
-        const { user } = this.props.auth;
-    
+        
         return (
-          <div className="register">
-              {user ? user.name : null}
-            <div className="container">
-              <div className="row">
-                <div className="col-md-8 m-auto">
-                  <h1 className="display-4 text-center">Sign Up</h1>
-                  <p className="lead text-center">
-                    Create your DevConnector account
-                  </p>
-                  <form noValidate onSubmit={this.onSubmit}>
-                    <div className="form-group">
-                      <input
-                        type="text"
-                        className={classnames('form-control form-control-lg', {
-                          'is-invalid': errors.name
-                        })}
-                        placeholder="Name"
-                        name="name"
-                        value={this.state.name}
-                        onChange={this.onChange}
-                      />
-                      {errors.name && (
-                        <div className="invalid-feedback">{errors.name}</div>
-                      )}
+          <div className="container">
+            
+            <div className="row justify-content-center">        
+              <div className="col-xl-10 col-lg-12 col-md-9">
+                <div className="card o-hidden border-0 shadow-lg my-5">
+                  <div className="card-body p-0">
+                    <div className="row">
+                      <div className="col-lg-6 d-none d-lg-block bg-login-image"></div>
+                      <div className="col-lg-6">
+                        <div className="p-5">
+                          <div className="text-center">
+                            <h1 className="h4 text-gray-900 mb-4">Register</h1>
+                            { 
+                              this.state.error ? 
+                              <div className="alert alert-danger">{this.state.error.message}</div>: null
+                            }
+                          </div>
+                          <form className="user" onSubmit={this.onSubmit}>
+                            <div className="form-group">
+                              <input id="firstName"
+                                  type="text"
+                                  field="firstName"
+                                  value={this.state.firstName}
+                                  onChange={this.onChange}
+                                  required={true}
+                                  maxLength={100}
+                                  label="firstName"
+                                  name="firstName"
+                                  className="form-control"
+                                  placeholder="First Name" 
+                                />
+                            </div>
+                            <div className="form-group">
+                              <input id="lastName"
+                                  type="text"
+                                  field="lastName"
+                                  value={this.state.lastName}
+                                  onChange={this.onChange}
+                                  required={true}
+                                  maxLength={100}
+                                  label="lastName"
+                                  name="lastName"
+                                  className="form-control"
+                                  placeholder="Last Name" 
+                                />
+                            </div>
+                            <div className="form-group">
+      
+                              <input id="email"
+                                type="email"
+                                field="email"
+                                value={this.state.email}
+                                onChange={this.onChange}
+                                required={true}
+                                maxLength={100}
+                                label="userId"
+                                name="email"
+                                className="form-control"
+                                placeholder="Email" />
+                            </div>
+                            <div className="form-group">
+                              <input id="password"
+                                field="password"
+                                value={this.state.password}
+                                onChange={this.onChange}
+                                required={true}
+                                maxLength={100}
+                                className="form-control"
+                                type="password"
+                                label="Password"
+                                name="password"
+                                placeholder="Password" />
+                            </div>                            
+                            <button
+                              className={`btn btn-primary btn-user btn-block`}
+                              type="submit">
+                              Register
+                            </button>
+                          </form>
+                        </div>
+                      </div>
                     </div>
-                    <div className="form-group">
-                      <input
-                        type="email"
-                        className={classnames('form-control form-control-lg', {
-                          'is-invalid': errors.email
-                        })}
-                        placeholder="Email Address"
-                        name="email"
-                        value={this.state.email}
-                        onChange={this.onChange}
-                      />
-                      {errors.email && (
-                        <div className="invalid-feedback">{errors.email}</div>
-                      )}
-                      <small className="form-text text-muted">
-                        This site uses Gravatar so if you want a profile image, use
-                        a Gravatar email
-                      </small>
-                    </div>
-                    <div className="form-group">
-                      <input
-                        type="password"
-                        className={classnames('form-control form-control-lg', {
-                          'is-invalid': errors.password
-                        })}
-                        placeholder="Password"
-                        name="password"
-                        value={this.state.password}
-                        onChange={this.onChange}
-                      />
-                      {errors.password && (
-                        <div className="invalid-feedback">{errors.password}</div>
-                      )}
-                    </div>
-                    <div className="form-group">
-                      <input
-                        type="password"
-                        className={classnames('form-control form-control-lg', {
-                          'is-invalid': errors.password2
-                        })}
-                        placeholder="Confirm Password"
-                        name="password2"
-                        value={this.state.password2}
-                        onChange={this.onChange}
-                      />
-                      {errors.password2 && (
-                        <div className="invalid-feedback">{errors.password2}</div>
-                      )}
-                    </div>
-                    <input type="submit" className="btn btn-info btn-block mt-4" />
-                  </form>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
+    
         );
+                
       }
 
 }
@@ -145,13 +154,12 @@ class Register extends React.Component {
 Register.propTypes = {
     registerUser: PropTypes.func.isRequired,
     auth: PropTypes.object.isRequired,
-    error: PropTypes.object.isRequired
 }
 
 const mapStateToProps = (state) => {
     return {
-        auth: state.auth,
-        error: state.error
+        auth: state.firebase.auth,
+        error: state.errors.error
     };
 };
 

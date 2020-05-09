@@ -22,14 +22,14 @@ const Admin = () => {
         <TopMenu />
           <div className="container-fluid">
             <Alert/>
-            <Switch>
+            {/* <Switch> */}
                 <ProtectedRoute exact path={"/"} component={Home} />
                 {/* <ProtectedRoute path={"/s"}><Home/></ProtectedRoute> */}
                 <ProtectedRoute exact path={`/projects/new`} component={ProjectAddForm} />
                 <ProtectedRoute exact path={`/projects`} component={ProjectList} />
                 <ProtectedRoute exact path={`/projects/:id/detail`} component={ProjectDetail} />
                 <ProtectedRoute exact path={`/projects/:id/edit`} component={ProjectEditForm} />
-            </Switch>
+            {/* </Switch> */}
           </div>
         </div>
       </div>

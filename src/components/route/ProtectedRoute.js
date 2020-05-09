@@ -5,14 +5,15 @@ import { connect } from 'react-redux';
 
 const ProtectedRoute = ({
     component: Component,
-    auth: { isAuthenticated },
+    auth,
     ...rest
   }) => {
-      console.log('isAuthenticated',isAuthenticated)
+
+      let isAuth = auth.uid ? true : false;
       return <Route
       {...rest}
       render={props =>
-        isAuthenticated ? (
+        isAuth ? (
           <Component {...props} />
         ) : (
           <Redirect to="/login" />
@@ -26,7 +27,7 @@ ProtectedRoute.propTypes = {
   };
   
   const mapStateToProps = state => ({
-    auth: state.auth
+    auth: state.firebase.auth
   });
   
-  export default connect(mapStateToProps)(ProtectedRoute);
+  export default connect(mapStateToProps,null)(ProtectedRoute);
