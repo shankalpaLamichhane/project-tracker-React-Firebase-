@@ -29,7 +29,7 @@ const ProjectAddForm = (props) => {
             code: formData.code,
             description: formData.description,
             createdBy: {
-                userId: 'userId'
+                userId: props.auth.uid
             }
         }
         props.addProject(newProject);
@@ -111,4 +111,10 @@ const ProjectAddForm = (props) => {
     )
 }
 
-export default connect(null, { addProject })(ProjectAddForm);
+const mapStateToProps = (state) => {
+    return {
+      auth: state.firebase.auth
+    }
+  }
+
+export default connect(mapStateToProps, { addProject })(ProjectAddForm);
