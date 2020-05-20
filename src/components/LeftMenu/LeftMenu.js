@@ -68,10 +68,24 @@ const LeftMenu = () => {
                 </li>
 
                 <li className="nav-item">
-                    <Link className="nav-link" to={`/orders`}>
+                    <Link className="nav-link" to={`/tasks/new`}>
                         <i className="fas fa-fw fa-dollar-sign"></i>
-                        <span>Orders</span>
+                        <span>Tasks</span>
                     </Link>
+                    <ul>
+                        <li>
+                            <Link className="nav-link" to={`/tasks/new`}>
+                                <i className="fas fa-fw fa-warehouse"></i>
+                                <span>New</span>
+                            </Link>
+                        </li>
+                        <li>
+                            <Link className="nav-link" to={`/tasks`}>
+                                <i className="fas fa-fw fa-warehouse"></i>
+                                <span>List</span>
+                            </Link>
+                        </li>
+                    </ul>
                 </li>
 
                 <hr className="sidebar-divider" />

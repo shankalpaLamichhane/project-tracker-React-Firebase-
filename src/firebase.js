@@ -21,5 +21,6 @@ firebase.initializeApp(firebaseConfig);
 const databaseRef = firebase.database().ref();
 export const projectsRef = databaseRef.child("projects")
 export const usersRef = databaseRef.child("users")
+export const tasksRef = databaseRef.child("tasks")
 
 export default firebase;

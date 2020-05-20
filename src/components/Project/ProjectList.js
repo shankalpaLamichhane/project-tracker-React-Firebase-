@@ -17,7 +17,6 @@ const ProjectList = (props) => {
   }, [props.clearProject,props.fetchProjects,props.project.loading]);
 
   const { project } = props;
-  console.log('THE PROJECTs ARE ::: ' + JSON.stringify(projects));
 
   return (
     (props.loading || null == project.projects)?

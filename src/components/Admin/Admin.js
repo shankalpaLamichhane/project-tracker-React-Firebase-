@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Fragment,Suspense } from "react";
 import LeftMenu from "../LeftMenu/LeftMenu";
 import Notifications from '../../common/components/Notification'
 import TopMenu from '../TopMenu/TopMenu'
@@ -10,6 +10,10 @@ import ProjectDetail from '../Project/ProjectDetail'
 import Alert from '../layout/Alert';
 import ProjectEditForm from "../Project/ProjectEditForm";
 import ProtectedRoute from "../route/ProtectedRoute";
+import TaskAddForm from '../Task/TaskAddForm'
+import TaskList from '../Task/TaskList'
+import TaskDetail from '../Task/TaskDetail'
+import TaskEditForm from '../Task/TaskEditForm'
 
 const Admin = () => {
 
@@ -29,6 +33,10 @@ const Admin = () => {
                 <ProtectedRoute exact path={`/projects`} component={ProjectList} />
                 <ProtectedRoute exact path={`/projects/:id/detail`} component={ProjectDetail} />
                 <ProtectedRoute exact path={`/projects/:id/edit`} component={ProjectEditForm} />
+                <ProtectedRoute exact path={`/tasks/new`} component={TaskAddForm}/>
+                <ProtectedRoute exact path={`/tasks`} component={TaskList}/>
+                <ProtectedRoute exact path={`/tasks/:id/detail`}  component={TaskDetail}/>
+                <ProtectedRoute exact path={`/tasks/:id/edit`} component={TaskEditForm} />
             {/* </Switch> */}
           </div>
         </div>
