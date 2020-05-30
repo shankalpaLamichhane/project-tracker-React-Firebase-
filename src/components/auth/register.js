@@ -22,7 +22,7 @@ class Register extends React.Component {
 
       componentDidMount() {
         if(this.props.auth.uid) {
-          this.props.history.push('/');
+          // this.props.history.push('/');
         }
       }
       

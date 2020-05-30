@@ -14,6 +14,10 @@ import TaskAddForm from '../Task/TaskAddForm'
 import TaskList from '../Task/TaskList'
 import TaskDetail from '../Task/TaskDetail'
 import TaskEditForm from '../Task/TaskEditForm'
+import UserAddForm from '../user/UserAddForm'
+import UserList from '../user/UserList'
+import UserDetail from '../user/UserDetail'
+import UserEditForm from "../user/UserEditForm";
 
 const Admin = () => {
 
@@ -37,6 +41,10 @@ const Admin = () => {
                 <ProtectedRoute exact path={`/tasks`} component={TaskList}/>
                 <ProtectedRoute exact path={`/tasks/:id/detail`}  component={TaskDetail}/>
                 <ProtectedRoute exact path={`/tasks/:id/edit`} component={TaskEditForm} />
+                <ProtectedRoute exact path={`/users/add`} component={UserAddForm} />
+                <ProtectedRoute exact path={`/users`} component={UserList} />
+                <ProtectedRoute exact path={`/users/:id/detail`} component={UserDetail} />
+                <ProtectedRoute exact path={`/users/:id/edit`} component={UserEditForm} />
             {/* </Switch> */}
           </div>
         </div>
