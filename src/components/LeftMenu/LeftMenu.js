@@ -95,11 +95,27 @@ const LeftMenu = () => {
                 </div>
 
 
+                
+
                 <li className="nav-item">
-                    <Link className="nav-link" to={`/users`}>
+                    <Link className="nav-link" to={`/users/add`}>
                         <i className="fas fa-fw fa-user"></i>
                         <span>Users</span>
                     </Link>
+                    <ul>
+                        <li>
+                            <Link className="nav-link" to={`/users/add`}>
+                                <i className="fas fa-fw fa-warehouse"></i>
+                                <span>New</span>
+                            </Link>
+                        </li>
+                        <li>
+                            <Link className="nav-link" to={`/users`}>
+                                <i className="fas fa-fw fa-warehouse"></i>
+                                <span>List</span>
+                            </Link>
+                        </li>
+                    </ul>
                 </li>
 
                 <hr className="sidebar-divider d-none d-md-block" />
