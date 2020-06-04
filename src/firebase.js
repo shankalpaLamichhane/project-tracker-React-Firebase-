@@ -4,17 +4,18 @@ import "firebase/database";
 import "firebase/storage";
 import "firebase/firestore";
 import "firebase/functions";
+import firebase_config from "./config/firebase_config";
   // Your web app's Firebase configuration
   // Your web app's Firebase configuration
 // Your web app's Firebase configuration
 var firebaseConfig = {
-  apiKey: "AIzaSyAQ_XYpCEq27G5Kl6W_eoeGCJ18LTQ3g6w",
-  authDomain: "react-firebase-auth-bfff6.firebaseapp.com",
-  databaseURL: "https://react-firebase-auth-bfff6.firebaseio.com",
-  projectId: "react-firebase-auth-bfff6",
-  storageBucket: "react-firebase-auth-bfff6.appspot.com",
-  messagingSenderId: "1053620932333",
-  appId: "1:1053620932333:web:b8eefc2868c4e12f7c06e4"
+  apiKey: firebase_config.REACT_APP_FIREBASE_KEY,
+  authDomain: firebase_config.REACT_APP_FIREBASE_DOMAIN,
+  databaseURL: firebase_config.REACT_APP_FIREBASE_DATABASE,
+  projectId: firebase_config.REACT_APP_FIREBASE_PROJECT_ID,
+  storageBucket: firebase_config.REACT_APP_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: firebase_config.REACT_APP_FIREBASE_SENDER_ID,
+  appId: firebase_config.REACT_APP_FIREBASE_APP_ID
 };
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
