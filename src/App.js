@@ -5,7 +5,6 @@ import './App.css';
 import './styles/sb-admin-2.min.css';
 import Login from './components/auth/login';
 import Register from './components/auth/register';
-import Test from './components/test';
 
 function App() {
 
@@ -15,7 +14,6 @@ function App() {
         <Switch>
         <Route exact path="/login" component={Login}/>
         <Route exact path="/register" component={Register}/>
-        <Route exact path="/test" component={Test}/>
         <Admin/>
         </Switch>
         </Router>
