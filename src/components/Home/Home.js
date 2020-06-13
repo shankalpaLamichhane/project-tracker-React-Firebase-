@@ -1,52 +1,53 @@
-import React, { Fragment, Dispatch } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import TopCard from "../../common/components/TopCard";
+import React from 'react';
+import {Doughnut,Line} from 'react-chartjs-2';
 
-const Home = () => {
+const data = {
+    labels: ["Project Tracker","BlockChain","Elastic Search"],
+    datasets: [
+      {
+        label: "First dataset",
+        data: [85, 53, 85],
+        fill: true,
+        backgroundColor: "#C0C0C0",
+        borderColor: "#FF6347"
+      },
+      {
+        label: "Second dataset",
+        data: [75, 25, 35],
+        fill: false,
+        borderColor: "#228B22"
+      }
+    ]
+  };
 
-  return (
-    <Fragment>
-      <h1 className="h3 mb-2 text-gray-800">Dashboard</h1>
-      <p className="mb-4">Summary and overview of our admin stuff here</p>
+  const data2 = {
+    labels: ["User Crud","Admin UI","Project Crud"],
+    datasets: [
+      {
+        data: [1, 2, 3],
+        fill: true,
+        backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
+        borderColor: "#000000"
+      }
+    ]
+  };
 
-      <div className="row">
-        <TopCard title="PRODUCT COUNT" icon="box" class="primary" />
-        <TopCard title="PRODUCT AMOUNT" icon="warehouse" class="danger" />
-        <TopCard title="SUMMARY PRICE"  icon="dollar-sign" class="success" />
-      </div>
+  export default function Home(){
+      return(
+          <div className="Home">
 
-      <div className="row">
-        <TopCard title="SALES"  icon="donate" class="primary" />
-        <TopCard title="ORDER AMOUNT"  icon="calculator" class="danger" />
-      </div>
+            <div className="row" >
+                <Doughnut width="900" data={data2} />
+                <h6>Task Data Per Project</h6>
 
-      <div className="row">
+              </div>
+            <hr/>
 
-        <div className="col-xl-6 col-lg-6">
-          <div className="card shadow mb-4">
-            <div className="card-header py-3">
-              <h6 className="m-0 font-weight-bold text-green">Product list</h6>
-            </div>
-            <div className="card-body">
-            </div>
+              <div className="row">
+              <Line data={data} />
+              <h6>Project Engagement Data</h6>
+
+              </div>
           </div>
-
-        </div>
-
-        <div className="col-xl-6 col-lg-6">
-          <div className="card shadow mb-4">
-            <div className="card-header py-3">
-              <h6 className="m-0 font-weight-bold text-green">Order list</h6>
-            </div>
-            <div className="card-body">
-            </div>
-          </div>
-        </div>
-
-      </div>
-
-    </Fragment>
-  );
-};
-
-export default Home;
+      )
+  }
