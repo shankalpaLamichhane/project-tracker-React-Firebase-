@@ -6,6 +6,7 @@ const databaseRef = firebase.database().ref();
 export const tasksRef = databaseRef.child("tasks")
 
 export const addTask = (newTask={}) => async dispatch => {
+
     tasksRef
     .child(newTask.id)
     .set(newTask)
@@ -24,6 +25,21 @@ export const fetchTasks = () => async dispatch => {
             type: FETCH_TASKS,
             payload: snap.val()
         })
+        console.log('THE TASKS IN TASK ACTION '+JSON.stringify(snap.val()))
+    })
+}
+
+export const fetchTasksByProjectId = (projectId) => async dispatch => {
+    const filteredTasks = [];
+    tasksRef.on("value",snap=>{
+        dispatch({
+            type: FETCH_TASKS,
+            payload: snap.val()
+            
+        })
+
+        Object.values(snap.val()).filter($=>projectId == $.project)
+        
         console.log('THE TASKS IN TASK ACTION '+JSON.stringify(snap.val()))
     })
 }

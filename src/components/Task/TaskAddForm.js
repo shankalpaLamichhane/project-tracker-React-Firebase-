@@ -10,6 +10,7 @@ const TaskAddForm = (props) => {
         name: '',
         assignee: '',
         project: '',
+        status:'',
         description: '',
         deadline: new Date(),
         errors: [],
@@ -37,12 +38,14 @@ const TaskAddForm = (props) => {
             description: formData.description,
             assignee: formData.assignee,
             project: formData.project,
+            status: formData.status,
             deadline: formData.deadline,
             createdBy: {
-                userId: props.auth.uid
+                // userId: props.auth.uid
+                userId:'SYSTEM'
             }
         }
-        console.log('THE FORM DATA IS ::: '+JSON.stringify(formData))
+        console.log('THE NEW TASK IS ::: '+JSON.stringify(newTask))
         props.addTask(newTask);
     }
 
@@ -101,9 +104,22 @@ const TaskAddForm = (props) => {
                                         {projects!=null &&  _.map(projects,(project,key)=>{
                                             console.log(JSON.stringify(project))
                                             return(
-                                                <option value={project.code}>{project.name}</option>
+                                                <option value={project.id}>{project.name}</option>
                                             )
                                         })}
+                                    </select>
+                                </div>
+                            </div>
+                            <div className="form-row">
+                                <div className="form-group col-md-6">
+                                    <label htmlFor={"status"}>Status</label>
+                                    <select className="form-control" id="status" name="status" onChange={(e) => onChange(e)}>
+                                            return(
+                                                <option value="To_Do">To Do</option>
+                                                <option value="In_Progress">In Progress</option>
+                                                <option value="Review">Review</option>
+                                                <option value="Done">Done</option>
+                                            )
                                     </select>
                                 </div>
                             </div>
