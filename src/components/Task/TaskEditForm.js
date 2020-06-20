@@ -11,6 +11,7 @@ const TaskEditForm = (props) => {
         name: '',
         assignee: '',
         project: '',
+        status:'',
         description: '',
         deadline: new Date(),
         errors: [],
@@ -33,6 +34,7 @@ const TaskEditForm = (props) => {
             description: null != task && task.description ? task.description : 'task.description',
             assignee: null != task && task.assignee ? task.assignee : 'task.asignee',
             project: null != task && task.assignee ? task.assignee : 'task.asignee',
+            status: null != task && task.status ? task.status: 'task.status',
             deadline: null != task && task.deadline ? task.deadline : 'task.asignee',
         })
         return () => {
@@ -120,6 +122,19 @@ const TaskEditForm = (props) => {
                                                 <option value={project.code}>{project.name}</option>
                                             )
                                         })}
+                                    </select>
+                                </div>
+                            </div>
+                            <div className="form-row">
+                                <div className="form-group col-md-6">
+                                    <label htmlFor={"status"}>Status</label>
+                                    <select className="form-control" id="status" name="status" onChange={(e) => onChange(e)}>
+                                            return(
+                                                <option value="To_Do">To Do</option>
+                                                <option value="In_Progress">In Progress</option>
+                                                <option value="Review">Review</option>
+                                                <option value="Done">Done</option>
+                                            )
                                     </select>
                                 </div>
                             </div>

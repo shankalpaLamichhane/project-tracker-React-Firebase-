@@ -85,6 +85,12 @@ const LeftMenu = () => {
                                 <span>List</span>
                             </Link>
                         </li>
+                        <li>
+                            <Link className="nav-link" to={`/tasks/board`}>
+                                <i className="fas fa-fw fa-warehouse"></i>
+                                <span>Board</span>
+                            </Link>
+                        </li>
                     </ul>
                 </li>
 
