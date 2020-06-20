@@ -1,5 +1,5 @@
 # project-tracker
-Project Tracker
+Project Tracker ( Task Tracking App ) using React and Firebase
 
 
 **Task board**
