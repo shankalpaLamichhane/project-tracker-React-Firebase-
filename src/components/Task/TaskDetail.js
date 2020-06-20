@@ -32,11 +32,12 @@ const TaskDetail = (props) => {
         <h4>Loading ... </h4>:
         <Fragment>
         <div className="form-row">
-            <b><h2>{task.project}</h2></b>            
+            <b><h4>Project Id = {task.project}</h4></b>            
             <hr/>
             <label>Name</label><h3 className="form-control">{task.name}</h3>
             <label>Assined To : </label><h3 className="form-control">{task.assignee}</h3>
             <label>Description</label><h3 className="form-control">{task.description}</h3>
+            <label>Status</label><h3 className="form-control">{task.status}</h3>
             <label>Deadline</label><h4 className="form-control">{task.deadline}</h4>
             <div className="flex-row">
             <button className="btn-danger btn-sm m-2" onClick={handleShow}>Delete task</button>

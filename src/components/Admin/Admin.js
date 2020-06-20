@@ -12,6 +12,7 @@ import ProjectEditForm from "../Project/ProjectEditForm";
 import ProtectedRoute from "../route/ProtectedRoute";
 import TaskAddForm from '../Task/TaskAddForm'
 import TaskList from '../Task/TaskList'
+import TaskBoard from '../Task/TaskBoard'
 import TaskDetail from '../Task/TaskDetail'
 import TaskEditForm from '../Task/TaskEditForm'
 import UserAddForm from '../user/UserAddForm'
@@ -39,6 +40,7 @@ const Admin = () => {
                 <ProtectedRoute exact path={`/projects/:id/edit`} component={ProjectEditForm} />
                 <ProtectedRoute exact path={`/tasks/new`} component={TaskAddForm}/>
                 <ProtectedRoute exact path={`/tasks`} component={TaskList}/>
+                <ProtectedRoute exact path={`/tasks/board`} component={TaskBoard}/>
                 <ProtectedRoute exact path={`/tasks/:id/detail`}  component={TaskDetail}/>
                 <ProtectedRoute exact path={`/tasks/:id/edit`} component={TaskEditForm} />
                 <ProtectedRoute exact path={`/users/add`} component={UserAddForm} />
